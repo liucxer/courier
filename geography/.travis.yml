@@ -1,0 +1,32 @@
+language: go
+sudo: false
+
+go:
+- 1.12
+
+services:
+- mysql
+- postgresql
+
+addons:
+  postgresql: 9.6
+  apt:
+    sources:
+    - mysql-5.7-trusty
+    packages:
+    - mysql-server
+    - mysql-client
+    - postgresql-9.6-postgis-2.3
+
+before_install:
+- sudo service mysql restart
+- psql -U postgres -c "create extension postgis"
+
+env:
+- GO111MODULE=on
+
+script:
+- make cover
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
