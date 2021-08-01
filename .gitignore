@@ -1,0 +1,12 @@
+*.dylib
+*.so
+*.exe
+*.exe~
+*.dll
+*.test
+*.out
+
+go.sum
+coverage.*
+vendor/
+.idea/
