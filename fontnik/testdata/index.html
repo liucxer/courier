@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <title>Display a map with a custom style</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet'/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #text {
+            position: absolute;
+            top: calc(50% + 7px); /* desent of Noto Sans is 7 */
+            left: 50%;
+            line-height: 1;
+            font-size: 96px;
+            opacity: 0.5;
+            transform: translate3d(-50%, -100%, 0);
+            font-family: 'Noto Sans', sans-self;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<div id="text">
+    1你2好@gMah好il
+</div>
+<script>
+    const fontSize = 96
+
+    const map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: {
+            version: 8,
+            sources: {
+                demo: {
+                    type: "geojson",
+                    data: {
+                        type: "Point",
+                        coordinates: [0, 0]
+                    }
+                }
+            },
+            glyphs: "./{fontstack}/{range}.pbf",
+            layers: [
+                {
+                    id: "text-top",
+                    source: "demo",
+                    type: "symbol",
+                    paint: {
+                        "text-opacity": 0.5,
+                        "text-color": "red",
+                    },
+                    layout: {
+                        "text-line-height": 1,
+                        "text-field": "1你2好@gMah好il",
+                        "text-font": ["NotoSans"],
+                        "text-anchor": "bottom",
+                        "text-size": fontSize,
+                        "text-allow-overlap": true,
+                    },
+                }
+            ],
+        },
+        center: [0, 0], // starting position
+        zoom: 3, // starting zoom
+    });
+
+    map.showTileBoundaries = true
+
+</script>
+
+</body>
+</html>

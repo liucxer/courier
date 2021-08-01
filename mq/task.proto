@@ -1,0 +1,17 @@
+syntax = "proto3";
+package proto;
+option go_package = "github.com/liucxer/courier/mq";
+
+enum STAGE {
+  PENDING = 0;
+  SUCCESS = 1;
+  FAILED = 2;
+};
+
+message Task {
+  string subject = 1;
+  string id = 2;
+  bytes argv = 3;
+
+  STAGE stage = 4;
+}

@@ -1,0 +1,2 @@
+// +gengo:jsonschema
+package a

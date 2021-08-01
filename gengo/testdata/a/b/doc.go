@@ -1,0 +1,2 @@
+// +gengo:defaulter
+package b
