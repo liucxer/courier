@@ -50,7 +50,7 @@ func FromContext(ctx context.Context) Logger {
 	if v, ok := ctx.Value(contextKey{}).(Logger); ok {
 		return v
 	}
-	return StdLogger()
+	return Discard()
 }
 
 func Start(ctx context.Context, name string, keyAndValues ...interface{}) (context.Context, Logger) {
